@@ -10,9 +10,14 @@ server((req, res) => {
 
     if (req.url === '/home') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
+        console.log(res.statusCode)
+        console.log(res.messageerror)
         res.end('Home page');
+
     } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
+        console.log(res.statusCode)
+        console.log(res.messageerror)
         res.end('Not found page');
     }
 }).listen(3333, () => {
