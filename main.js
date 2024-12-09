@@ -2,8 +2,8 @@ const {join: createPath} = require("node:path");
 const fs = require("node:fs/promises");
 
 const func = async () => {
-    await fs.rm(createPath(process.cwd(), 'data'), {recursive: true, force: true});
-    await fs.mkdir(createPath(process.cwd(), 'data'))
+    // await fs.rm(createPath(process.cwd(), 'data'), {recursive: true, force: true});
+    await fs.mkdir(createPath(process.cwd(), 'data'), {recursive: true, force: true})
 
     const createDirectories = async (dirs) => {
         for (const dir of dirs) {
@@ -30,11 +30,11 @@ const func = async () => {
         }
     };
 
-    await void createDirectories(['dogs', 'cats', 'elephants', 'tigers', 'lions']);
-    await void createFilesToDirs(['dogs', 'cats', 'elephants', 'tigers', 'lions'], ['dog', 'cat', 'elephant', 'tiger', 'lion']);
+    await  createDirectories(['dogs', 'cats', 'elephants', 'tigers', 'lions']);
+    await  createFilesToDirs(['dogs', 'cats', 'elephants', 'tigers', 'lions'], ['dog', 'cat', 'elephant', 'tiger', 'lion']);
 
-    await void identifyPaths([createPath(process.cwd(), 'data'),
-        createPath(process.cwd(), 'data')]);
+    await  identifyPaths([createPath(process.cwd(), 'data'),
+        createPath(process.cwd(), 'data', 'cats', 'cat.json')]);
 }
 void func()
 
