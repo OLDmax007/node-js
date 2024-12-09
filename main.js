@@ -33,7 +33,7 @@ const func = async () => {
     await void createDirectories(['dogs', 'cats', 'elephants', 'tigers', 'lions']);
     await void createFilesToDirs(['dogs', 'cats', 'elephants', 'tigers', 'lions'], ['dog', 'cat', 'elephant', 'tiger', 'lion']);
 
-    await identifyPaths([createPath(process.cwd(), 'data'),
+    await void identifyPaths([createPath(process.cwd(), 'data'),
         createPath(process.cwd(), 'data')]);
 }
 void func()
