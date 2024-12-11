@@ -21,30 +21,24 @@ const func = async () => {
         }
     }
 
-    const identifyPaths = async (dirs) => {
-
-        pathToMainDir = createPath(process.cwd(), 'data')
-        const data = await fs.readdir(pathToMainDir)
-        for (const dir of data) {
-            console.log(dir)
-            const files = await fs.readdir(createPath(pathToMainDir, dir))
-            for (const file of files) {
-                const path = createPath(pathToMainDir, dir, file)
-                const stat = await fs.stat(path);
-                if (stat.isFile()) {
-                    console.log(`${path} - file.`);
-                } else if (stat.isDirectory()) {
-                    console.log(`${path} - directory.`);
-                }
+    const identifyPaths = async (currentPath) => {
+        const data = await fs.readdir(currentPath)
+        for (const item of data) {
+            const fullPath = createPath(currentPath, item)
+            const statItem = await fs.stat(fullPath)
+            if (statItem.isDirectory()) {
+                console.log(fullPath, 'is directory');
+                identifyPaths(fullPath)
+            } else {
+                console.log(fullPath, 'is file')
             }
-
         }
     };
 
     await  createDirectories(['dogs', 'cats', 'elephants', 'tigers', 'lions']);
     await  createFilesToDirs(['dogs', 'cats', 'elephants', 'tigers', 'lions'], ['dog', 'cat', 'elephant', 'tiger', 'lion']);
 
-    await  identifyPaths(['dogs', 'cats', 'elephants', 'tigers', 'lions']);
+    await  identifyPaths(createPath(process.cwd(), 'data'));
 
 }
 void func()
